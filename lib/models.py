@@ -17,3 +17,11 @@ class Game(Base):
     genre = Column(String())
     platform = Column(String())
     price = Column(Integer())
+
+class Review(Base):
+    __tablename__ = 'reviews'
+
+    id = Column(Integer(), primary_key=True)
+    score = Column(Integer())
+    comment = Column(String())
+    game_id = Column(Integer(), ForeignKey('games.id'))
