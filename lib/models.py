@@ -18,6 +18,8 @@ class Game(Base):
     platform = Column(String())
     price = Column(Integer())
 
+    reviews = relationship('Review', backref=backref('game'))
+
 class Review(Base):
     __tablename__ = 'reviews'
 
