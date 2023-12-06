@@ -18,7 +18,11 @@ class Game(Base):
     platform = Column(String())
     price = Column(Integer())
 
-    reviews = relationship('Review', backref=backref('game'))
+
+# relationship('Review') - This establishes a relationship between the two classes: Game and Review.
+# backref=backref('game') - This adds a new property to the ‘Review’ class. After defining this, you can access the ‘game’ from a ‘Review’ instance, and SQLAlchemy will automatically join the related rows and return the related ‘game’.
+# cascade='all, delete-orphan' - This is a delete cascade option. It means that when a ‘game’ is deleted, all related ‘Review’ instances will be deleted as well. The ‘delete-orphan’ cascade option means that child objects (in this case ‘Review’) that are no longer associated with any parent (here, ‘game’) will be deleted.
+    reviews = relationship('Review', backref=backref('game'), cascade='all, delete-orphan')
 
     def __repr__(self):
         return f'Game(id={self.id}, ' + \
