@@ -20,6 +20,11 @@ class Game(Base):
 
     reviews = relationship('Review', backref=backref('game'))
 
+    def __repr__(self):
+        return f'Game(id={self.id}, ' + \
+            f'title={self.title}, ' + \
+            f'platform={self.platform})'
+
 class Review(Base):
     __tablename__ = 'reviews'
 
@@ -27,3 +32,8 @@ class Review(Base):
     score = Column(Integer())
     comment = Column(String())
     game_id = Column(Integer(), ForeignKey('games.id'))
+
+    def __repr__(self):
+        return f'Review(id={self.id}, ' + \
+            f'score={self.score}, ' + \
+            f'game_id={self.game_id})'
